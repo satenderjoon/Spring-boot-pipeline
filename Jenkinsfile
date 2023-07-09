@@ -1,6 +1,10 @@
 node {
+    checkout scm
     stage('Build') {
-        sh 'mvn clean install'
+        withMaven(globalMavenSettingsConfig: '', jdk: 'JDK11', maven: 'Maven3.5.3', mavenSettingsConfig: '', traceability: true) {
+            sh 'mvn clean install'
+        }
+        
     }
     stage('Test') {
         echo 'Testing....'
